@@ -6,6 +6,7 @@
 parameters:
 
 services:
+    Symfony\Component\Security\Core\User\UserProviderInterface: '@security.user.provider.concrete.users_in_database'
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.

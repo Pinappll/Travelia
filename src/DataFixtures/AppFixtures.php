@@ -77,7 +77,7 @@ class AppFixtures extends Fixture
             $plainPassword = 'password';
             $hashedPassword = $this->passwordHasher->hashPassword($user, $plainPassword);
             $user->setPassword($hashedPassword);
-            $user->setRoles(UserTypeEnum::USER);
+            $user->setRoles('ROLE_USER');
             $manager->persist($user);
             $users[] = $user;
         }
@@ -92,7 +92,7 @@ class AppFixtures extends Fixture
         $hashedPassword = $this->passwordHasher->hashPassword($admin, $plainPassword);
         $admin->setPassword($hashedPassword);
 
-        $admin->setRoles(UserTypeEnum::ADMIN);
+        $admin->setRoles('ROLE_ADMIN');
         $manager->persist($admin);
 
         // Normal User
@@ -103,18 +103,18 @@ class AppFixtures extends Fixture
         $plainPassword = 'user';
         $hashedPassword = $this->passwordHasher->hashPassword($normal, $plainPassword);
         $normal->setPassword($hashedPassword);
-        $normal->setRoles(UserTypeEnum::USER);
+        $normal->setRoles('ROLE_USER');
         $manager->persist($normal);
 
         // Banned
         $banned = new User();
         $banned->setFirstname('Banned');
         $banned->setLastname('Banned');
-        $banned->setEmail('banned');
+        $banned->setEmail('banned@mail.fr');
         $plainPassword = 'banned';
         $hashedPassword = $this->passwordHasher->hashPassword($banned, $plainPassword);
         $banned->setPassword($hashedPassword);
-        $banned->setRoles(UserTypeEnum::BANNED);
+        $banned->setRoles('ROLE_BANNED');
         $manager->persist($banned);
     }
 

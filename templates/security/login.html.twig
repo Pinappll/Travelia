@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen flex items-center justify-center bg-gray-50">
+        <div class="max-w-md w-full bg-white p-8 shadow-lg rounded-lg">
+            <!-- Titre -->
+            <h1 class="text-2xl font-bold text-blue-950 text-center mb-6">Connexion</h1>
+
+            <!-- Message d'erreur -->
+            {% if error %}
+                <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+
+            <!-- Message si déjà connecté -->
+            {% if app.user %}
+                <div class="bg-blue-100 text-blue-700 p-4 rounded mb-4">
+                    Vous êtes connecté en tant que {{ app.user.userIdentifier }}.
+                    <a href="{{ path('app_logout') }}" class="text-blue-800 font-semibold hover:underline">Déconnexion</a>
+                </div>
+            {% endif %}
+
+            <!-- Formulaire -->
+            <form method="post">
+                <!-- Champ email -->
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700 font-semibold mb-2">Adresse email</label>
+                    <input
+                            type="email"
+                            value="{{ last_username }}"
+                            name="_username"
+                            id="username"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            autocomplete="email"
+                            required
+                            autofocus
+                    >
+                </div>
+
+                <!-- Champ mot de passe -->
+                <div class="mb-4">
+                    <label for="password" class="block text-gray-700 font-semibold mb-2">Mot de passe</label>
+                    <input
+                            type="password"
+                            name="_password"
+                            id="password"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            autocomplete="current-password"
+                            required
+                    >
+                </div>
+
+                <!-- CSRF Token -->
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <!-- Bouton de connexion -->
+                <button
+                        type="submit"
+                        class="w-full bg-blue-950 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-800 transition duration-300"
+                >
+                    Se connecter
+                </button>
+
+                <!-- Option Remember Me (si activée) -->
+                {#
+                <div class="flex items-center mt-4">
+                    <input type="checkbox" name="_remember_me" id="_remember_me" class="mr-2">
+                    <label for="_remember_me" class="text-gray-700 text-sm">Se souvenir de moi</label>
+                </div>
+                #}
+            </form>
+
+            <!-- Lien vers la page d'inscription -->
+            <p class="mt-6 text-center text-sm text-gray-600">
+                Pas encore inscrit ?
+                <a href="{{ path('app_register') }}" class="text-blue-800 font-semibold hover:underline">Créer un compte</a>.
+            </p>
+
+            <!-- Lien vers la page de réinitialisation du mot de passe -->
+            <p class="mt-2 text-center text-sm text-gray-600">
+                Mot de passe oublié ?
+                <a href="{{ path('app_forgot_password_request') }}" class="text-blue-800 font-semibold hover:underline">Réinitialiser</a>.
+            </p>
+        </div>
+    </div>
+{% endblock %}

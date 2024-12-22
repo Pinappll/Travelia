@@ -7,10 +7,12 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface
+class User implements  UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -29,8 +31,8 @@ class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticate
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
-    #[ORM\Column(enumType: UserTypeEnum::class)]
-    private ?UserTypeEnum $roles = null;
+    #[ORM\Column]
+    private array $roles = ['ROLE_USER'];
 
     /**
      * @var Collection<int, Comment>
@@ -103,16 +105,28 @@ class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticate
         return $this;
     }
 
-    public function getRoles(): ?UserTypeEnum
+    public function getRoles(): array
     {
         return $this->roles;
     }
 
-    public function setRoles(UserTypeEnum $roles): static
-    {
-        $this->roles = $roles;
 
-        return $this;
+    public function setRoles(string $roles): void
+    {
+        $this->roles[] = $roles;
+
+    }
+
+    public function addRole(string $role): void
+    {
+        if (!in_array($role, $this->roles, true)) {
+            $this->roles[] = $role;
+        }
+    }
+
+    public function removeRole(string $role): void
+    {
+        $this->roles = array_filter($this->roles, fn($r) => $r !== $role);
     }
 
     /**
@@ -144,4 +158,16 @@ class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticate
 
         return $this;
     }
+
+    public function eraseCredentials(): void
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->getEmail();
+    }
+
+
 }
