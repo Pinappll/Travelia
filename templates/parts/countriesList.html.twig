@@ -1,0 +1,22 @@
+<br>
+<section class="countries-list px-2 ">
+    <h2 class="text-2xl text-blue-950 font-bold mb-4">Les pays les plus visités</h2>
+    <hr>
+    <br>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {% for country in countries %}
+            <li class="border rounded-lg shadow-lg overflow-hidden">
+                <!-- Image du pays -->
+                <img src="{{ country.image }}" alt="Drapeau de {{ country.name }}" class="w-full h-40 object-cover">
+                <!-- Détails du pays -->
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">
+                        <a href="/countries/{{ country.code }}" class="text-blue-600 hover:text-blue-800">
+                            {{ country.name }}
+                        </a>
+                    </h3>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</section>

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Travelia - Accueil{% endblock %}
+
+{% block body %}
+
+    <!-- Section avec une image de fond -->
+    <section class="relative">
+        <!-- Image de fond -->
+        <img
+                src="{{ asset('images/Map.jpg') }}"
+                alt="Carte du monde"
+                class="w-full h-[400px] object-cover rounded-lg shadow-lg"
+        >
+        <!-- Titre superposé -->
+        <div class="absolute inset-0 flex items-center justify-center bg-black/30">
+            <h1 class="text-white text-4xl md:text-6xl font-bold px-6 py-3 rounded-lg shadow-md">
+                Les pays du monde
+            </h1>
+        </div>
+    </section>
+
+    <!-- Section des pays -->
+    <section class="container mx-auto py-8">
+        <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for country in countries %}
+                <li class="border border-gray-200 rounded-lg shadow-md overflow-hidden hover:scale-105 transition-transform">
+                    <!-- Image du pays -->
+                    <img
+                            src="{{ country.image }}"
+                            alt="Drapeau de {{ country.name }}"
+                            class="w-full h-40 object-cover"
+                    >
+                    <!-- Détails du pays -->
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">
+                            <a href="/countries/{{ country.code }}" class="text-blue-600 hover:text-blue-800">
+                                {{ country.name }}
+                            </a>
+                        </h3>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Pagination -->
+        <div class="flex justify-center mt-6">
+            <nav class="inline-flex space-x-2">
+                {{ knp_pagination_render(countries) | raw }}
+            </nav>
+        </div>
+    </section>
+
+{% endblock %}

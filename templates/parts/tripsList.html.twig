@@ -1,0 +1,22 @@
+<br>
+<section class="frequent-trips px-2 sm:px-4 md:px-6">
+    <h2 class="text-2xl text-blue-950 font-bold mb-4">Voyages les plus fréquents</h2>
+    <hr>
+    <br>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {% for trip in trips %}
+            <li class="border rounded-lg shadow-lg overflow-hidden">
+                <!-- Image du voyage -->
+                <img src="{{ trip.image }}" alt="Image de {{ trip.title }}" class="w-full h-40 object-cover">
+                <!-- Détails du voyage -->
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">
+                        <a href="/trips/{{ trip.id }}" class="text-blue-600 hover:text-blue-800">
+                            {{ trip.title }}
+                        </a>
+                    </h3>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
