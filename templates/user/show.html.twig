@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'utilisateur{% endblock %}
+
+{% block body %}
+    <div class="p-6 bg-white shadow-md rounded-lg">
+        <!-- Titre -->
+        <h1 class="text-2xl font-bold text-blue-950 mb-6">Détails de l'utilisateur</h1>
+
+        <!-- Tableau des informations utilisateur -->
+        <table class="table-auto w-full border-collapse border border-gray-300">
+            <tbody>
+            <tr class="bg-gray-100">
+                <th class="border border-gray-300 px-4 py-2 text-left">ID</th>
+                <td class="border border-gray-300 px-4 py-2">{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th class="border border-gray-300 px-4 py-2 text-left">Prénom</th>
+                <td class="border border-gray-300 px-4 py-2">{{ user.firstname }}</td>
+            </tr>
+            <tr class="bg-gray-100">
+                <th class="border border-gray-300 px-4 py-2 text-left">Nom</th>
+                <td class="border border-gray-300 px-4 py-2">{{ user.lastname }}</td>
+            </tr>
+            <tr>
+                <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
+                <td class="border border-gray-300 px-4 py-2">{{ user.email }}</td>
+            </tr>
+            <tr class="bg-gray-100">
+                <th class="border border-gray-300 px-4 py-2 text-left">Rôles</th>
+                <td class="border border-gray-300 px-4 py-2">
+                    {% if user.roles %}
+                        {{ user.roles|join(', ') }}
+                    {% else %}
+                        Aucun rôle
+                    {% endif %}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Actions -->
+        <div class="mt-6 flex space-x-4">
+            <a href="{{ path('app_user_index') }}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-500">Retour à la liste</a>
+            <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500">Modifier</a>
+            {{ include('user/_delete_form.html.twig', {
+                'class': 'bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-500 cursor-pointer'
+            }) }}
+        </div>
+    </div>
+{% endblock %}

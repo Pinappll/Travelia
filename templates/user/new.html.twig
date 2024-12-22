@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un nouvel utilisateur{% endblock %}
+
+{% block body %}
+    <div class="p-6 bg-white shadow-md rounded-lg">
+        <!-- Titre -->
+        <h1 class="text-2xl font-bold text-blue-950 mb-6">Créer un nouvel utilisateur</h1>
+
+        <!-- Formulaire -->
+        <div class="mb-6">
+            {{ include('user/_form.html.twig') }}
+        </div>
+
+        <!-- Bouton de retour -->
+        <div class="mt-6">
+            <a href="{{ path('app_user_index') }}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-500">
+                Retour à la liste
+            </a>
+        </div>
+    </div>
+{% endblock %}

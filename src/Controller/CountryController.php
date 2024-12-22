@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Country;
 use App\Repository\CountryRepository;
+use App\Repository\TripRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,4 +36,17 @@ class CountryController extends AbstractController
             'countries' => $countries,
         ]);
     }
+
+    #[Route('/countries/{id}', name: 'country_trips', methods: ['GET'])]
+    public function showTrips(Country $country, TripRepository $tripRepository): Response
+    {
+        $trips = $tripRepository->findBy(['country' => $country]);
+
+        return $this->render('country/show_trips.html.twig', [
+            'country' => $country,
+            'trips' => $trips,
+        ]);
+    }
+
+
 }

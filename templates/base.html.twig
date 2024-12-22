@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" type="image/x-icon" href="{{ asset('images/TraveliLogo.svg') }}" />
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
-        {% endblock %}
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/TraveliLogo.svg') }}" />
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+    {% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body class="max-w-5xl mx-auto px-2 sm:px-4 md:px-6 ">
-        {% include 'parts/header.html.twig' %}
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</head>
+<body class="bg-white">
+{% include 'parts/header.html.twig' %}
+
+<!-- Wrapper principal -->
+<div class="flex">
+    <!-- Barre latérale -->
+    {% if is_granted('ROLE_ADMIN') %}
+        {% include 'parts/left_sidebar.html.twig' %}
+    {% endif %}
+
+    <!-- Contenu principal -->
+    <main class="flex-grow p-6 max-w-5xl mx-auto px-2 sm:px-4 md:px-6">
         {% block body %}{% endblock %}
-        <br>
-        {{ include('parts/footer.html.twig') }}
+    </main>
+</div>
 
-    </body>
+{{ include('parts/footer.html.twig') }}
+</body>
 </html>
+

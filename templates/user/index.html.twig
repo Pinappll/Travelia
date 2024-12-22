@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="p-6 bg-white shadow-md rounded-lg">
+        <h1 class="text-2xl font-bold text-blue-950 mb-6">Liste des utilisateurs</h1>
+
+        <div class="overflow-x-auto">
+            <table class="table-auto w-full border-collapse border border-gray-300">
+                <thead class="bg-gray-200">
+                <tr>
+                    <th class="border border-gray-300 px-4 py-2 text-left">ID</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Prénom</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Nom</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Rôles</th>
+                    <th class="border border-gray-300 px-4 py-2 text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr class="hover:bg-gray-100">
+                        <td class="border border-gray-300 px-4 py-2">{{ user.id }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ user.firstname }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ user.lastname }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ user.email }}</td>
+                        <td class="border border-gray-300 px-4 py-2">
+                            {% if user.roles %}
+                                {{ user.roles|join(', ') }}
+                            {% else %}
+                                Aucun rôle
+                            {% endif %}
+                        </td>
+                        <td class="border border-gray-300 px-4 py-2 text-center">
+                            <a href="{{ path('app_user_show', {'id': user.id}) }}" class="text-blue-600 hover:underline mr-4">Voir</a>
+                            <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="text-green-600 hover:underline">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="border border-gray-300 px-4 py-2 text-center text-gray-500">Aucun utilisateur trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-6">
+            <a href="{{ path('app_user_new') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500">Créer un nouvel utilisateur</a>
+        </div>
+    </div>
+{% endblock %}
