@@ -1,0 +1,13 @@
+<form
+        method="post"
+        action="{{ path('app_countries_delete', {'id': country.id}) }}"
+        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');"
+>
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ country.id) }}">
+    <button
+            type="submit"
+            class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-500 transition"
+    >
+        Supprimer
+    </button>
+</form>

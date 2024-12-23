@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des commentaires{% endblock %}
+
+{% block body %}
+    <div class="p-6 bg-white shadow-md rounded-lg max-w-6xl mx-auto">
+        <!-- Titre -->
+        <h1 class="text-3xl font-bold text-blue-950 mb-8">Liste des commentaires</h1>
+
+        <!-- Tableau des commentaires -->
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-gray-200">
+                <thead class="bg-gray-100">
+                <tr>
+                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Id</th>
+                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Contenu</th>
+                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Créé le</th>
+                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for comment in comments %}
+                    <tr class="border-b hover:bg-gray-50 transition">
+                        <td class="px-4 py-2 text-gray-700">{{ comment.id }}</td>
+                        <td class="px-4 py-2 text-gray-700">
+                            {{ comment.content|length > 50 ? comment.content|slice(0, 50) ~ '...' : comment.content }}
+                        </td>
+                        <td class="px-4 py-2 text-gray-700">{{ comment.createdAt ? comment.createdAt|date('d/m/Y H:i') : '' }}</td>
+                        <td class="px-4 py-2 flex space-x-2">
+                            <a
+                                    href="{{ path('app_comments_show', {'id': comment.id}) }}"
+                                    class="text-blue-600 hover:underline"
+                            >
+                                Voir
+                            </a>
+                            <a
+                                    href="{{ path('app_comments_edit', {'id': comment.id}) }}"
+                                    class="text-green-600 hover:underline"
+                            >
+                                Modifier
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="px-4 py-2 text-center text-gray-700">Aucun commentaire trouvé.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+{% endblock %}

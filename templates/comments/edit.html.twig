@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le commentaire{% endblock %}
+
+{% block body %}
+    <div class="p-6 bg-white shadow-md rounded-lg max-w-4xl mx-auto">
+        <!-- Titre -->
+        <h1 class="text-3xl font-bold text-blue-950 mb-8 border-b pb-4">Modifier le commentaire</h1>
+
+        <!-- Formulaire -->
+        <div class="mb-8">
+            {{ include('comments/_form.html.twig', { 'button_label': 'Mettre à jour' }) }}
+        </div>
+
+        <!-- Actions -->
+        <div class="flex justify-between">
+            <!-- Lien retour -->
+            <a
+                    href="{{ path('app_comments_index') }}"
+                    class="inline-block bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-500 transition focus:outline-none focus:ring-2 focus:ring-gray-300"
+            >
+                Retour à la liste
+            </a>
+
+            <!-- Formulaire de suppression -->
+            {{ include('comments/_delete_form.html.twig', {
+                'class': 'inline-block bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-500 transition focus:outline-none focus:ring-2 focus:ring-red-300'
+            }) }}
+        </div>
+    </div>
+{% endblock %}

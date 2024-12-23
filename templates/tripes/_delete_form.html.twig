@@ -1,0 +1,18 @@
+<form
+        method="post"
+        action="{{ path('app_tripes_delete', {'id': trip.id}) }}"
+        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');"
+        class="inline-block"
+>
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trip.id) }}">
+    <button
+            type="submit"
+            class="flex items-center bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-500 transition focus:outline-none focus:ring-2 focus:ring-red-300"
+    >
+        <!-- Icône -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 9v10m-8-10v10m4-11V5a1 1 0 00-2 0v2H7a2 2 0 00-2 2v2h14V9a2 2 0 00-2-2h-3V5a1 1 0 00-2 0v2z" />
+        </svg>
+        Supprimer
+    </button>
+</form>

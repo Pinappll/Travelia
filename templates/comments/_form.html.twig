@@ -1,0 +1,19 @@
+{{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+<!-- Champs du formulaire -->
+<div class="space-y-4">
+    {{ form_widget(form, {
+        'attr': {'class': 'w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'}
+    }) }}
+</div>
+
+<!-- Bouton de soumission -->
+<div class="flex justify-end">
+    <button
+            type="submit"
+            class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-300"
+    >
+        {{ button_label|default('Enregistrer') }}
+    </button>
+</div>
+{{ form_end(form) }}
+

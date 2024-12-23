@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du pays - {{ country.name }}{% endblock %}
+
+{% block body %}
+    <div class="p-6 bg-white shadow-md rounded-lg">
+        <!-- Titre -->
+        <h1 class="text-2xl font-bold text-blue-950 mb-6">Détails du pays</h1>
+
+        <!-- Tableau des détails -->
+        <table class="w-full border-collapse border border-gray-200">
+            <tbody>
+            <tr class="border-b">
+                <th class="text-left px-4 py-2 font-semibold text-gray-700 bg-gray-100">Id</th>
+                <td class="px-4 py-2 text-gray-700">{{ country.id }}</td>
+            </tr>
+            <tr class="border-b">
+                <th class="text-left px-4 py-2 font-semibold text-gray-700 bg-gray-100">Nom</th>
+                <td class="px-4 py-2 text-gray-700">{{ country.name }}</td>
+            </tr>
+            <tr class="border-b">
+                <th class="text-left px-4 py-2 font-semibold text-gray-700 bg-gray-100">Code</th>
+                <td class="px-4 py-2 text-gray-700">{{ country.code }}</td>
+            </tr>
+            <tr class="border-b">
+                <th class="text-left px-4 py-2 font-semibold text-gray-700 bg-gray-100">Image</th>
+                <td class="px-4 py-2">
+                    <img
+                            src="{{ country.image }}"
+                            alt="Image de {{ country.name }}"
+                            class="w-32 h-32 object-cover rounded-lg shadow-md"
+                    >
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Boutons d'action -->
+        <div class="mt-6 flex space-x-4">
+            <a href="{{ path('app_countries_index') }}"
+               class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-500">
+                Retour à la liste
+            </a>
+            <a href="{{ path('app_countries_edit', {'id': country.id}) }}"
+               class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500">
+                Modifier
+            </a>
+            {{ include('countries/_delete_form.html.twig', {
+                'class': 'bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-500'
+            }) }}
+        </div>
+    </div>
+{% endblock %}

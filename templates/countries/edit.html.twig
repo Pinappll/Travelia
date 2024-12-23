@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le pays - {{ country.name }}{% endblock %}
+
+{% block body %}
+    <div class="p-6 bg-white shadow-lg rounded-lg max-w-4xl mx-auto">
+        <!-- Titre -->
+        <h1 class="text-3xl font-bold text-blue-950 mb-8 border-b pb-4">Modifier le pays : {{ country.name }}</h1>
+
+        <!-- Formulaire -->
+        <div class="mb-8">
+            {{ include('countries/_form.html.twig', { 'button_label': 'Mettre à jour' }) }}
+        </div>
+
+        <!-- Actions -->
+        <div class="flex justify-between">
+            <!-- Retour à la liste -->
+            <a
+                    href="{{ path('app_countries_index') }}"
+                    class="inline-block bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-500 transition"
+            >
+                Retour à la liste
+            </a>
+
+            <!-- Bouton de suppression -->
+            {{ include('countries/_delete_form.html.twig', {
+                'class': 'inline-block bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-500 transition'
+            }) }}
+        </div>
+    </div>
+{% endblock %}
