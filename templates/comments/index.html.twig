@@ -19,12 +19,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for comment in comments %}
+                {% for comment in pagination %}
                     <tr class="border-b hover:bg-gray-50 transition">
                         <td class="px-4 py-2 text-gray-700">{{ comment.id }}</td>
-                        <td class="px-4 py-2 text-gray-700">
-                            {{ comment.content|length > 50 ? comment.content|slice(0, 50) ~ '...' : comment.content }}
-                        </td>
+                        <td class="px-4 py-2 text-gray-700">{{ comment.content|length > 50 ? comment.content|slice(0, 50) ~ '...' : comment.content }}</td>
                         <td class="px-4 py-2 text-gray-700">{{ comment.createdAt ? comment.createdAt|date('d/m/Y H:i') : '' }}</td>
                         <td class="px-4 py-2 flex space-x-2">
                             <a
@@ -50,6 +48,11 @@
             </table>
         </div>
 
-
+        <!-- Pagination -->
+        <div class="flex justify-center mt-6">
+            <nav>
+                {{ knp_pagination_render(pagination) }}
+            </nav>
+        </div>
     </div>
 {% endblock %}

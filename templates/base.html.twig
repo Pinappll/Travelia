@@ -20,7 +20,7 @@
 <!-- Wrapper principal -->
 <div class="flex">
     <!-- Barre latérale -->
-    {% if is_granted('ROLE_ADMIN') %}
+    {% if is_granted('ROLE_USER') %}
         {% include 'parts/left_sidebar.html.twig' %}
     {% endif %}
 
